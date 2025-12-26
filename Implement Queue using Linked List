@@ -1,0 +1,66 @@
+// Node class
+class Node {
+    int data;
+    Node next;
+
+    Node(int new_data) {
+        data = new_data;
+        next = null;
+    }
+}
+
+// Queue class
+class myQueue {
+    private Node front, rear;
+    private int size;
+
+    public myQueue() {
+        // Initialize your data members
+        front = rear = null;
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        // check if the queue is empty
+        return size == 0;
+    }
+
+    public void enqueue(int x) {
+        // Adds an element x at the rear of the queue.
+        Node newNode = new Node(x);
+        if (rear == null) { // queue is empty
+            front = rear = newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+        size++;
+    }
+
+    public void dequeue() {
+        // Removes the front element of the queue
+        if (isEmpty()) {
+            System.out.println("Queue is empty, cannot dequeue.");
+            return;
+        }
+        front = front.next;
+        if (front == null) { // queue became empty
+            rear = null;
+        }
+        size--;
+    }
+
+    public int getFront() {
+        // Returns the front element of the queue.
+        // If queue is empty, return -1.
+        if (isEmpty()) {
+            return -1;
+        }
+        return front.data;
+    }
+
+    public int size() {
+        // Returns the current size of the queue.
+        return size;
+    }
+}
