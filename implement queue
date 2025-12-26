@@ -1,0 +1,51 @@
+class myQueue {
+    private int[] arr;
+    private int front;
+    private int rear;
+    private int cap;
+    private int size;
+
+    // Constructor
+    public myQueue(int n) {
+        arr = new int[n];
+        cap = n;
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    // (v) isEmpty
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // (vi) isFull
+    public boolean isFull() {
+        return size == cap;
+    }
+
+    // (i) enqueue(x)
+    public void enqueue(int x) {
+        if (isFull()) return;
+        rear = (rear + 1) % cap;
+        arr[rear] = x;
+        size++;
+    }
+
+    // (ii) dequeue()
+    public void dequeue() {
+        if (isEmpty()) return;
+        front = (front + 1) % cap;
+        size--;
+    }
+
+    // (iii) getFront()
+    public int getFront() {
+        return isEmpty() ? -1 : arr[front];
+    }
+
+    // (iv) getRear()
+    public int getRear() {
+        return isEmpty() ? -1 : arr[rear];
+    }
+}
