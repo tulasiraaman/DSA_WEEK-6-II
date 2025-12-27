@@ -1,0 +1,45 @@
+class Solution {
+    public Queue<Integer> reverseFirstK(Queue<Integer> q, int k) {
+        // code here
+        int n = q.size();
+        if(k > n) return q;
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i = 0; i < k; i++){
+            st.push(q.poll());
+        }
+        while(!st.isEmpty()){
+            q.offer(st.pop());
+        }
+        for(int i = 0; i < n-k; i++){
+            q.offer(q.poll());
+        }
+        
+        return q;
+    }
+    
+    public Queue<Integer> reverseFirstK(Queue<Integer> q, int k) {
+        int n = q.size();
+        if (k > n) return q;
+
+        Deque<Integer> dq = new ArrayDeque<>();
+
+        // Step 1: Move first k elements into deque
+        for (int i = 0; i < k; i++) {
+            dq.push(q.poll()); // push acts like stack
+        }
+
+        // Step 2: Pop back into queue
+        while (!dq.isEmpty()) {
+            q.offer(dq.pop());
+        }
+
+        // Step 3: Rotate remaining elements
+        for (int i = 0; i < n - k; i++) {
+            q.offer(q.poll());
+        }
+
+        return q;
+    }
+
+}
