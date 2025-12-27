@@ -1,0 +1,26 @@
+class Solution {
+    public String firstNonRepeating(String s) {
+        // code here
+        int[] freq = new int[256]; // frequency for ASCII chars
+        Queue<Character> q = new LinkedList<>();
+        StringBuilder result = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            freq[c]++;
+            q.add(c);
+
+            // remove all repeating chars from front
+            while (!q.isEmpty() && freq[q.peek()] > 1) {
+                q.poll();
+            }
+
+            // append current first non-repeating
+            if (q.isEmpty()) {
+                result.append("#"); // or "-1" depending on requirement
+            } else {
+                result.append(q.peek());
+            }
+        }
+        return result.toString();
+    }
+}
