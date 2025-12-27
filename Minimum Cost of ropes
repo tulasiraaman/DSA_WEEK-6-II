@@ -1,0 +1,46 @@
+class Solution {
+    public static int minCost(int[] arr) {
+        // code here
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int rope : arr) {
+            pq.add(rope);
+        }
+        int totalCost = 0;
+        while (pq.size() > 1) {
+            int first = pq.poll();
+            int second = pq.poll();
+            int cost = first + second;
+            totalCost += cost;
+            pq.add(cost);
+        }
+        return totalCost;
+        //TC - O(n log n), SC - O(n)
+    }
+    
+    public static int minnCost(int[] arr) {
+        // code here
+        List<Integer> ropes = new ArrayList<>();
+        for (int rope : arr) ropes.add(rope);
+
+        int totalCost = 0;
+
+        while (ropes.size() > 1) {
+            // Step 1: Sort the list
+            Collections.sort(ropes);
+
+            // Step 2: Take two smallest
+            int first = ropes.remove(0);
+            int second = ropes.remove(0);
+
+            // Step 3: Connect them
+            int cost = first + second;
+            totalCost += cost;
+
+            // Step 4: Insert new rope
+            ropes.add(cost);
+        }
+
+        return totalCost;
+        //TC - O(n) + O(n log n) * n - 1 = O(n^2 log n)
+    }
+}
